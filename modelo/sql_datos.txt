@@ -1,0 +1,390 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.0
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 12-07-2011 a las 21:17:40
+-- Versión del servidor: 5.0.45
+-- Versión de PHP: 5.2.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de datos: `oma`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `aderentes`
+--
+
+CREATE TABLE `aderentes` (
+  `id_aderentes` int(10) unsigned NOT NULL auto_increment,
+  `id_socio` int(10) unsigned NOT NULL,
+  `id_aderente_categoria` int(10) unsigned NOT NULL,
+  `razon_social` varchar(125) default NULL,
+  PRIMARY KEY  (`id_aderentes`),
+  KEY `aderentes_FKIndex1` (`id_aderente_categoria`),
+  KEY `aderentes_FKIndex2` (`id_socio`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `aderentes`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `aderentes_categorias`
+--
+
+CREATE TABLE `aderentes_categorias` (
+  `id_aderente_categoria` int(10) unsigned NOT NULL auto_increment,
+  `aderente_categoria` varchar(125) default NULL,
+  `importe` decimal(10,2) default NULL,
+  `id_usuario` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id_aderente_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `aderentes_categorias`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ciudades`
+--
+
+CREATE TABLE `ciudades` (
+  `id_ciudad` int(10) unsigned NOT NULL auto_increment,
+  `id_estado` int(10) unsigned NOT NULL,
+  `ciudad` varchar(75) default NULL,
+  `codigo_postal` varchar(25) default NULL,
+  `id_usuario` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id_ciudad`),
+  KEY `ciudades_FKIndex1` (`id_estado`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `ciudades`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras_movimientos`
+--
+
+CREATE TABLE `compras_movimientos` (
+  `id_compra_movimiento` int(10) unsigned NOT NULL auto_increment,
+  `id_usuario` int(10) unsigned NOT NULL,
+  `id_proveedor` int(10) unsigned NOT NULL,
+  `id_tipo_comprobantes_compra` int(10) unsigned NOT NULL,
+  `fecha` date default NULL,
+  `nro_comprobante` varchar(12) default NULL,
+  `importe` decimal(10,2) default NULL,
+  `descripcion` varchar(255) default NULL,
+  PRIMARY KEY  (`id_compra_movimiento`),
+  KEY `compras_movimientos_FKIndex1` (`id_tipo_comprobantes_compra`),
+  KEY `compras_movimientos_FKIndex2` (`id_proveedor`),
+  KEY `compras_movimientos_FKIndex3` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `compras_movimientos`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `configuracion`
+--
+
+CREATE TABLE `configuracion` (
+  `id_configuracion` int(10) unsigned NOT NULL auto_increment,
+  `id_usuario` int(10) unsigned NOT NULL,
+  `codigo` varchar(100) default NULL,
+  `descripcion` varchar(255) default NULL,
+  `numero` decimal(10,2) default NULL,
+  `texto` text,
+  `fecha` date default NULL,
+  PRIMARY KEY  (`id_configuracion`),
+  KEY `configuracion_FKIndex1` (`id_usuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados`
+--
+
+CREATE TABLE `estados` (
+  `id_estado` int(10) unsigned NOT NULL auto_increment,
+  `estado` varchar(50) default NULL,
+  `id_usuario` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id_estado`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `estados`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagenes`
+--
+
+CREATE TABLE `imagenes` (
+  `id_imagen` int(10) unsigned NOT NULL auto_increment,
+  `id_usuario` int(10) unsigned NOT NULL,
+  `file_name` varchar(255) default NULL,
+  PRIMARY KEY  (`id_imagen`),
+  KEY `imagenes_FKIndex1` (`id_usuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `imagenes`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedores`
+--
+
+CREATE TABLE `proveedores` (
+  `id_proveedor` int(10) unsigned NOT NULL auto_increment,
+  `proveedor` varchar(75) default NULL,
+  `direccion` varchar(125) default NULL,
+  `id_usuario` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id_proveedor`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `proveedores`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `socios`
+--
+
+CREATE TABLE `socios` (
+  `id_socio` int(10) unsigned NOT NULL auto_increment,
+  `id_tipo_documento` int(10) unsigned NOT NULL,
+  `id_usuario` int(10) unsigned NOT NULL,
+  `id_socio_categoria` int(10) unsigned NOT NULL,
+  `id_ciudad` int(10) unsigned NOT NULL,
+  `nro_documento` varchar(25) default NULL,
+  `codigo` varchar(30) default NULL,
+  `razon_social` varchar(75) default NULL,
+  `direccion` varchar(125) default NULL,
+  `telefonos` varchar(75) default NULL,
+  `email` varchar(75) default NULL,
+  `estado` enum('activo','inactivo') default NULL,
+  PRIMARY KEY  (`id_socio`),
+  KEY `socios_FKIndex1` (`id_ciudad`),
+  KEY `socios_FKIndex2` (`id_socio_categoria`),
+  KEY `socios_FKIndex3` (`id_usuario`),
+  KEY `socios_FKIndex4` (`id_tipo_documento`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `socios`
+--
+
+
+--
+-- Estructura de tabla para la tabla `socios_categorias`
+--
+
+CREATE TABLE `socios_categorias` (
+  `id_socio_categoria` int(10) unsigned NOT NULL auto_increment,
+  `categoria` varchar(75) default NULL,
+  `importe_cuota` decimal(10,2) default NULL,
+  `id_usuario` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id_socio_categoria`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `socios_categorias`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipos_comprobantes_compra`
+--
+
+CREATE TABLE `tipos_comprobantes_compra` (
+  `id_tipo_comprobantes_compra` int(10) unsigned NOT NULL auto_increment,
+  `comprobante_compra` varchar(125) default NULL,
+  `id_usuario` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id_tipo_comprobantes_compra`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcar la base de datos para la tabla `tipos_comprobantes_compra`
+--
+
+INSERT INTO `tipos_comprobantes_compra` (`id_tipo_comprobantes_compra`, `comprobante_compra`, `id_usuario`) VALUES
+(1, 'Factura', NULL),
+(2, 'Remito', NULL),
+(3, 'Orden de pago', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipos_comprobantes_ventas`
+--
+
+CREATE TABLE `tipos_comprobantes_ventas` (
+  `id_tipo_comprobante_venta` int(10) unsigned NOT NULL auto_increment,
+  `tipo_comprobante_venta` varchar(75) default NULL,
+  PRIMARY KEY  (`id_tipo_comprobante_venta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcar la base de datos para la tabla `tipos_comprobantes_ventas`
+--
+
+INSERT INTO `tipos_comprobantes_ventas` (`id_tipo_comprobante_venta`, `tipo_comprobante_venta`) VALUES
+(1, 'Factura'),
+(2, 'Recibo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipos_documentos`
+--
+
+CREATE TABLE `tipos_documentos` (
+  `id_tipo_documento` int(10) unsigned NOT NULL auto_increment,
+  `tipo_documento` varchar(25) default NULL,
+  PRIMARY KEY  (`id_tipo_documento`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcar la base de datos para la tabla `tipos_documentos`
+--
+
+INSERT INTO `tipos_documentos` (`id_tipo_documento`, `tipo_documento`) VALUES
+(1, 'Dni'),
+(2, 'Cuil'),
+(3, 'Cuit'),
+(4, 'Pasaporte');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int(10) unsigned NOT NULL auto_increment,
+  `usuario` varchar(50) NOT NULL,
+  `clave` varchar(75) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `email` varchar(125) NOT NULL,
+  `activo` enum('si','no') NOT NULL,
+  `tipo` enum('invitado','registrado','administrador','vendedor') NOT NULL,
+  `session` varchar(255) NOT NULL,
+  `codigo` varchar(75) default NULL,
+  `porcentaje_vendedor` decimal(10,2) default NULL,
+  `url_logo` varchar(255) default NULL,
+  `razon_social` varchar(125) default NULL,
+  `cuit` varchar(11) default NULL,
+  `direccion` varchar(125) default NULL,
+  `telefono` varchar(75) default NULL,
+  `contacto` varchar(75) default NULL,
+  PRIMARY KEY  (`id_usuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `usuarios`
+--
+
+
+--
+-- Estructura de tabla para la tabla `ventas_movimientos`
+--
+
+CREATE TABLE `ventas_movimientos` (
+  `id_venta_movimiento` int(10) unsigned NOT NULL auto_increment,
+  `id_tipo_comprobante_venta` int(10) unsigned NOT NULL,
+  `id_socio` int(10) unsigned NOT NULL,
+  `nro_comprobante` bigint(20) default NULL,
+  `fecha` date default NULL,
+  `periodo_mes` int(10) unsigned default NULL,
+  `periodo_anio` int(10) unsigned default NULL,
+  `importe` decimal(10,2) default NULL,
+  `estado` enum('adeudado','pagado','anulado') default NULL,
+  `observaciones` text,
+  PRIMARY KEY  (`id_venta_movimiento`),
+  KEY `ventas_movimientos_FKIndex1` (`id_socio`),
+  KEY `ventas_movimientos_FKIndex2` (`id_tipo_comprobante_venta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `ventas_movimientos`
+--
+
+--
+-- Filtros para las tablas descargadas (dump)
+--
+
+--
+-- Filtros para la tabla `aderentes`
+--
+ALTER TABLE `aderentes`
+  ADD CONSTRAINT `aderentes_ibfk_1` FOREIGN KEY (`id_aderente_categoria`) REFERENCES `aderentes_categorias` (`id_aderente_categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `aderentes_ibfk_2` FOREIGN KEY (`id_socio`) REFERENCES `socios` (`id_socio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  ADD CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `compras_movimientos`
+--
+ALTER TABLE `compras_movimientos`
+  ADD CONSTRAINT `compras_movimientos_ibfk_1` FOREIGN KEY (`id_tipo_comprobantes_compra`) REFERENCES `tipos_comprobantes_compra` (`id_tipo_comprobantes_compra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `compras_movimientos_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `compras_movimientos_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  ADD CONSTRAINT `configuracion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  ADD CONSTRAINT `imagenes_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `socios`
+--
+ALTER TABLE `socios`
+  ADD CONSTRAINT `socios_ibfk_1` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudades` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `socios_ibfk_2` FOREIGN KEY (`id_socio_categoria`) REFERENCES `socios_categorias` (`id_socio_categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `socios_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `ventas_movimientos`
+--
+ALTER TABLE `ventas_movimientos`
+  ADD CONSTRAINT `ventas_movimientos_ibfk_1` FOREIGN KEY (`id_socio`) REFERENCES `socios` (`id_socio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ventas_movimientos_ibfk_2` FOREIGN KEY (`id_tipo_comprobante_venta`) REFERENCES `tipos_comprobantes_ventas` (`id_tipo_comprobante_venta`) ON DELETE NO ACTION ON UPDATE NO ACTION;

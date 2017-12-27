@@ -1,0 +1,90 @@
+body {
+	font-family: Helvetica, sans-serif, Verdana, Arial;
+	font-size: 12px;
+	background-color: #cce7d4;
+	text-decoration: none;
+	color: #666666;
+	text-align: left;        
+}
+
+
+.principal {
+	width: 920px;
+}
+.top_div {
+	border-radius: 7px;
+	-ms-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	vertical-align: middle;
+	padding: 6px;
+}
+
+.fondo_formulario_div {
+	background-color: #FFFFFF;
+	border-radius: 7px;
+	-ms-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	text-align: left;
+	vertical-align: top;
+	padding: 10px;
+	color: #000000;
+}
+
+.fondo_formulario_tabla_div {
+	background-color: #FFFFCC;
+	border-radius: 7px;
+	-ms-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	text-align: left;
+	vertical-align: middle;
+	padding: 10px;
+	color: #000000;
+}
+.fondo_formulario_tabla_titulo {
+	color: #333333;
+	background-color: #FFFF99;
+	text-align: center;
+}
+
+
+.end_div {
+	background-color: #FFFFCC;
+	width: 720px;
+	border-radius: 7px;
+	-ms-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	text-align: center;
+	vertical-align: middle;
+	padding: 6px;
+}
+.fondo_polaroid {
+	height: auto;
+	width: 130px;
+	background-color: #FFFFFF;
+	margin: 4px;
+	padding: 8px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.fondo_polaroiddescripcion {
+	height: auto;
+	width: 590px;
+	background-color: #FFFFFF;
+	margin: 4px;
+	padding: 8px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.tabla {
+	background-color: #F5FAFA;
+}
+.tabla_titulo {
+	background-color: #CCE7D4;
+	text-align: center;
+}

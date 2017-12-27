@@ -1,0 +1,13 @@
+Razon Social ---- usuario
+Cuit ----- usuario
+direccion --- usuario
+relefono --- usuario
+email ----usuario
+contacto ---- usuario
+
+
+
+configuracion:
+
+siguiente_nro_factura
+siguiente_nro_recibo

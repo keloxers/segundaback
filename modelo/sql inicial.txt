@@ -1,0 +1,49 @@
+INSERT INTO `cn000611_oma`.`tipos_documentos` (
+`id_tipo_documento` ,
+`tipo_documento`
+)
+VALUES (
+NULL , 'Dni'
+), (
+NULL , 'LE'
+), (
+NULL , 'Cuit'
+), (
+NULL , 'Cuil'
+);
+
+
+
+INSERT INTO `cn000611_oma`.`tipos_comprobantes_ventas` (
+`id_tipo_comprobante_venta` ,
+`tipo_comprobante_venta`
+)
+VALUES (
+NULL , 'Factura'
+), (
+NULL , 'Recibo'
+);
+
+
+
+INSERT INTO `cn000611_oma`.`usuarios` (
+`id_usuario` ,
+`usuario` ,
+`clave` ,
+`nombre` ,
+`email` ,
+`activo` ,
+`tipo` ,
+`session` ,
+`codigo` ,
+`porcentaje_vendedor` ,
+`url_logo` ,
+`razon_social` ,
+`cuit` ,
+`direccion` ,
+`telefono` ,
+`contacto`
+)
+VALUES (
+NULL , 'admin', 'happyclown', 'Miguel Mendez', 'keloxers@gmail.com', 'si', 'administrador', '', NULL , NULL , NULL , NULL , NULL , NULL , NULL , NULL
+);
